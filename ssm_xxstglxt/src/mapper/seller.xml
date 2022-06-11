@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置Mabatis映射文件 -->
+<mapper namespace="com.dao.SellerDAO">
+	<resultMap type="seller" id="sellerMap">
+		<id property="sellerid" column="sellerid" />
+		<result property="username" column="username" />
+		<result property="password" column="password" />
+		<result property="shopname" column="shopname" />
+		<result property="idcard" column="idcard" />
+		<result property="contact" column="contact" />
+		<result property="address" column="address" />
+		<result property="workdate" column="workdate" />
+		<result property="status" column="status" />
+		<result property="regdate" column="regdate" />
+	</resultMap>
+	<!-- 插入语句 DAO通过id调用此配置 -->
+	<insert id="insertSeller" parameterType="seller">
+		insert into seller(sellerid , username , password , shopname , idcard , contact , address , workdate , status , regdate ) values(#{sellerid} , #{username} ,
+		#{password} , #{shopname} , #{idcard} , #{contact} , #{address} , #{workdate} , #{status} , #{regdate} )
+	</insert>
+	<!-- 更新语句 DAO通过id调用此配置 -->
+	<update id="updateSeller" parameterType="seller">
+		update seller set username=#{username} , password=#{password} , shopname=#{shopname} , idcard=#{idcard} , contact=#{contact} , address=#{address} ,
+		workdate=#{workdate} , status=#{status} , regdate=#{regdate} where sellerid=#{sellerid}
+	</update>
+	<!-- 按主键删除 DAO通过id调用此配置 -->
+	<delete id="deleteSeller" parameterType="String">
+		delete from seller where sellerid = #{sellerid}
+	</delete>
+	<!-- 查询全部信息 DAO通过id调用此配置 -->
+	<select id="getAllSeller" resultMap="sellerMap">
+		select a.* from seller a order by sellerid desc
+	</select>
+	<!-- 按主键查询 DAO通过id调用此配置 -->
+	<select id="getSellerById" parameterType="String" resultMap="sellerMap">
+		select a.* from seller a where sellerid=#{sellerid} order by sellerid desc
+	</select>
+	<!-- 按条件精确查询 DAO通过id调用此配置 -->
+	<select id="getSellerByCond" parameterType="seller" resultMap="sellerMap">
+		select a.* from seller a where 1=1
+		<if test="username != null and '' != username">
+			and a.username = #{username}
+		</if>
+		<if test="password != null and '' != password">
+			and a.password = #{password}
+		</if>
+		<if test="shopname != null and '' != shopname">
+			and a.shopname = #{shopname}
+		</if>
+		<if test="idcard != null and '' != idcard">
+			and a.idcard = #{idcard}
+		</if>
+		<if test="contact != null and '' != contact">
+			and a.contact = #{contact}
+		</if>
+		<if test="address != null and '' != address">
+			and a.address = #{address}
+		</if>
+		<if test="workdate != null and '' != workdate">
+			and a.workdate = #{workdate}
+		</if>
+		<if test="status != null and '' != status">
+			and a.status = #{status}
+		</if>
+		<if test="regdate != null and '' != regdate">
+			and a.regdate = #{regdate}
+		</if>
+	</select>
+	<!-- 按条件模糊查询 DAO通过id调用此配置 -->
+	<select id="getSellerByLike" parameterType="seller" resultMap="sellerMap">
+		select a.* from seller a where 1=1
+		<if test="username != null and '' != username">
+			and a.username like CONCAT('%', CONCAT(#{username}, '%'))
+		</if>
+		<if test="password != null and '' != password">
+			and a.password like CONCAT('%', CONCAT(#{password}, '%'))
+		</if>
+		<if test="shopname != null and '' != shopname">
+			and a.shopname like CONCAT('%', CONCAT(#{shopname}, '%'))
+		</if>
+		<if test="idcard != null and '' != idcard">
+			and a.idcard like CONCAT('%', CONCAT(#{idcard}, '%'))
+		</if>
+		<if test="contact != null and '' != contact">
+			and a.contact like CONCAT('%', CONCAT(#{contact}, '%'))
+		</if>
+		<if test="address != null and '' != address">
+			and a.address like CONCAT('%', CONCAT(#{address}, '%'))
+		</if>
+		<if test="workdate != null and '' != workdate">
+			and a.workdate like CONCAT('%', CONCAT(#{workdate}, '%'))
+		</if>
+		<if test="status != null and '' != status">
+			and a.status like CONCAT('%', CONCAT(#{status}, '%'))
+		</if>
+		<if test="regdate != null and '' != regdate">
+			and a.regdate like CONCAT('%', CONCAT(#{regdate}, '%'))
+		</if>
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 此程序作者 QQ:709664889 如有修改请联系本QQ -->
